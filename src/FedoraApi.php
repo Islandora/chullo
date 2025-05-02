@@ -92,7 +92,11 @@ class FedoraApi implements IFedoraApi
         array $headers = []
     ): ResponseInterface {
         // Set headers
-        $options = ['http_errors' => false, 'headers' => $headers];
+        $options = [
+            'http_errors' => false,
+            'headers' => $headers,
+            'stream' => true,
+        ];
 
         // Send the request.
         return $this->client->request(

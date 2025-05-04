@@ -95,7 +95,9 @@ class FedoraApi implements IFedoraApi
         $options = [
             'http_errors' => false,
             'headers' => $headers,
-            'stream' => true,
+            // Do not stream if a Range header is requested
+            // so symfony can seek to the range offset.
+            'stream' => empty($headers['Range']),
         ];
 
         // Send the request.

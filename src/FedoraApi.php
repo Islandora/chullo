@@ -92,7 +92,13 @@ class FedoraApi implements IFedoraApi
         array $headers = []
     ): ResponseInterface {
         // Set headers
-        $options = ['http_errors' => false, 'headers' => $headers];
+        $options = [
+            'http_errors' => false,
+            'headers' => $headers,
+            // Do not stream if a Range header is requested
+            // so symfony can seek to the range offset.
+            'stream' => empty($headers['Range']),
+        ];
 
         // Send the request.
         return $this->client->request(

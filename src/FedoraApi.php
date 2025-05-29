@@ -91,13 +91,17 @@ class FedoraApi implements IFedoraApi
         string $uri = "",
         array $headers = []
     ): ResponseInterface {
+        $extension = strtolower(pathinfo($uri, PATHINFO_EXTENSION));
+        $commonImageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'tiff', 'tif', 'svg', 'ico', 'heic', 'avif'];
+
         // Set headers
         $options = [
             'http_errors' => false,
             'headers' => $headers,
             // Do not stream if a Range header is requested
             // so symfony can seek to the range offset.
-            'stream' => empty($headers['Range']),
+            // or images dues to https://bugs.php.net/bug.php?id=69706
+            'stream' => empty($headers['Range']) && !in_array($extension, $commonImageExtensions),
         ];
 
         // Send the request.

@@ -92,7 +92,20 @@ class FedoraApi implements IFedoraApi
         array $headers = []
     ): ResponseInterface {
         $extension = strtolower(pathinfo($uri, PATHINFO_EXTENSION));
-        $commonImageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'tiff', 'tif', 'svg', 'ico', 'heic', 'avif'];
+        $commonImageExtensions = [
+          'png',
+          'jpg',
+          'jpeg',
+          'gif',
+          'bmp',
+          'webp',
+          'tiff',
+          'tif',
+          'svg',
+          'ico',
+          'heic',
+          'avif',
+        ];
 
         // Set headers
         $options = [

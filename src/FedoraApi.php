@@ -105,6 +105,7 @@ class FedoraApi implements IFedoraApi
           'ico',
           'heic',
           'avif',
+          'jp2',
         ];
 
         // Set headers
